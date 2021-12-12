@@ -23,12 +23,33 @@ nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4sh
 
 # References
 
+General references and links to the vulnerability
+
 ## General
 
-## Detection
+[Reddit thread](https://www.reddit.com/r/blueteamsec/comments/rd38z9/log4j_0day_being_exploited/) - General information about log4shell
+[NCC log4shell](https://github.com/NCSC-NL/log4shell) - operational information regarding the vulnerability (IOCs, mitigation, scanning, software)
 
-## Mitigation
+## Related
 
-## Fixing
+[BlueTeam CheatSheet Log4Shell](https://gist.github.com/SwitHak/b66db3a06c2955a9cb71a8718970c592) - Security Advisories / Bulletins linked to Log4Shell (CVE-2021-44228)
+[Software List - cheat-sheet reference guide](https://www.techsolvency.com/story-so-far/cve-2021-44228-log4j-log4shell/) - Affected software list by vendor responses
 
+## Testing
+
+[lo4shell.huntress.com](https://log4shell.huntress.com/) - Online Log4Shell Vulnerability Tester
+[log4j yara](https://github.com/timb-machine/log4j) - yara rules for local detection
+[identify-log4j-class-location.sh](https://gist.github.com/righettod/ce1570954242de2f8772c6f25eece77d) - Script to identify Log4J affected class for CVE-2021-44228 in a collection of ear/war/jar files
+
+## Exploitation Detection
+
+[log4shell-detector](https://github.com/Neo23x0/log4shell-detector) - Detector for Log4Shell exploitation attempts
+[Log4Shell-IOCs](https://github.com/curated-intel/Log4Shell-IOCs) - a list of IOC feeds and threat reports
+[log4j_rce_detection.md](https://gist.github.com/Neo23x0/e4c8b03ff8cdf1fa63b7d15db6e3860b) - You can use these commands and rules to search for exploitation attempts 
+
+## Mitigation/Fixing
+
+[log4j advisory](https://logging.apache.org/log4j/2.x/security.html) - Apache Log4j Security Vulnerabilities
+[log4j pull request and comments](https://github.com/apache/logging-log4j2/pull/608) - pull request that fixes bug with comments
+[Logout4Shell](https://github.com/Cybereason/Logout4Shell) - Quick and dirty alternative to patching manually
 
