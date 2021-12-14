@@ -22,7 +22,7 @@ license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 categories = {"default", "vuln", "safe", "log4shell"}
 
 -- portrule = shortport.http
-portrule = shortport.port_or_service({80,443,8080}, {"http","https"})
+portrule = shortport.port_or_service({80,443,8080}, {"http","https","http-proxy"})
 
 action = function(host, port)
   local resp, redirect_url, title
