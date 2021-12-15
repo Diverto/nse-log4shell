@@ -68,15 +68,13 @@ nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4sh
 
 Thanks to @saintz666
 
-# Solution/Fixes
+## Recommended way
 
-List of best fixes and workarounds.
+dnslog.cn have short sessions (around half an hour). There should be way to prolong the sesion to how long the scan takes. Also, sometimes DNS query happens much later than request received. Someone reported got DNS request hours after the request has been made.
+As workaround, nmap NSE scripts retrieve session after each host scanned.
 
-## Best fix
-
-Best solution to protect from CVE-2021-44228:
-Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.16.0 or later.
-Note that log4j-2.15.0-rc1 is not recomended any more since new vulnerabilities were found. Therefore, you should update to log4j-2.16.0 or later (thanks @ruppde).
+Therefore, currently, for best assurance it is to use custom DNS domain with tool like logdns:
+https://github.com/kost/logdns
 
 ## Sample Output
 
@@ -136,6 +134,17 @@ Post-scan script results:
 Read data files from: /usr/local/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 46.11 seconds
 ```
+
+# Solution/Fixes
+
+List of best fixes and workarounds.
+
+## Best fix
+
+Best solution to protect from CVE-2021-44228:
+Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.16.0 or later.
+
+Note that log4j-2.15.0-rc1 is not recomended any more since new vulnerabilities were found. Therefore, you should update to log4j-2.16.0 or later (thanks @ruppde).
 
 # References
 
