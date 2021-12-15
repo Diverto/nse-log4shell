@@ -18,13 +18,13 @@ Position to directory where these scripts are located and issue following comman
 On Linux:
 ```
 cd nse-log4shell
-nmap -T4 -v --script=$PWD/ scanme.nmap.org
+nmap -sV -T4 -v --script=$PWD/ scanme.nmap.org
 ```
 
 On Windows:
 ```
 cd nse-log4shell
-nmap -T4 -v --script=%cd%/ scanme.nmap.org
+nmap -sV -T4 -v --script=%cd%/ scanme.nmap.org
 ```
 
 
