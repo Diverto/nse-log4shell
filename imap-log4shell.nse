@@ -18,7 +18,7 @@ Performs log4shell attack against IMAP servers using either LOGIN, PLAIN, CRAM-M
 --                       CRAM-MD5, DIGEST-MD5 or NTLM
 
 -- Version 0.1
--- Created 2021-12-11 - v0.1 - created by Vlatko Kosturjak <kost@diverto.hr>
+-- Created 2021-12-11 - v0.1 - created by Vlatko Kosturjak <kost@linux.hr>
 
 
 author = "Vlatko Kosturjak"
