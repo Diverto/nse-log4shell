@@ -74,7 +74,8 @@ List of best fixes and workarounds.
 ## Best fix
 
 Best solution to protect from CVE-2021-44228:
-Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.15.0-rc1 or later.
+Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.16.0 or later.
+Note that log4j-2.15.0-rc1 is not recomended any more since new vulnerabilities were found. Therefore, you should update to log4j-2.16.0 or later (thanks @ruppde).
 
 # References
 
@@ -94,6 +95,8 @@ General references and links to the vulnerability
 
 ## Testing
 
+Note that remote and online checks are useful as additional assurance or quick test. For additional assurance, it is recommended to scan locally files for known log4j signatures.
+
 [lo4shell.huntress.com](https://log4shell.huntress.com/) - Online Log4Shell Vulnerability Tester
 
 [log4j yara](https://github.com/timb-machine/log4j) - yara rules for local detection
@@ -110,7 +113,7 @@ General references and links to the vulnerability
 
 [Log4Shell-IOCs](https://github.com/curated-intel/Log4Shell-IOCs) - a list of IOC feeds and threat reports
 
-[log4j_rce_detection.md](https://gist.github.com/Neo23x0/e4c8b03ff8cdf1fa63b7d15db6e3860b) - You can use these commands and rules to search for exploitation attempts 
+[log4j_rce_detection.md](https://gist.github.com/Neo23x0/e4c8b03ff8cdf1fa63b7d15db6e3860b) - You can use these commands and rules to search for exploitation attempts
 
 ## Mitigation/Fixing
 
