@@ -6,15 +6,14 @@ NSE scripts check most popular exposed services on the Internet. It is basic scr
 
 ### Examples
 
-Note that NSE scripts will only issue the requests to the services. Nmap will not report vulnerable hosts, but you have to check DNS logs to determine vulnerability.
+Note that NSE scripts will only issue the requests to the services. Nmap will not report vulnerable hosts, but you have to check DNS logs to determine vulnerability. If you do not specify payload manually, NSE scripts will use dnslog.cn by default. That means requests will be seen by dnslog.cn.
+
 Also note that DNS resolution with prefixes combination in a expression for log4j-core <= 2.7 seems not supported. So, testing with something like ```${java:os}``` could lead to false negatives.
 Therefore, better to have few false positives than negatives.
 
 ## Quick with help of dnslog.cn
 
-If you do not specify payload manually, NSE scripts will use dnslog.cn by default. That means requests will be seen by dnslog.cn.
-
-Position to directory where these scripts are located and issue following commands.
+Position to directory where these scripts are located and issue following commands (Nmap will retrieve dnslog.cn automatically).
 
 On Linux:
 ```
