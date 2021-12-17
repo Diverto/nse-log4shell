@@ -142,9 +142,22 @@ List of best fixes and workarounds.
 ## Best fix
 
 Best solution to protect from CVE-2021-44228:
-Start your server with log4j2.formatMsgNoLookups set to true, or update to log4j-2.16.0 or later.
+update to log4j-2.16.0 or later.
 
 Note that log4j-2.15.0-rc1 is not recomended any more since new vulnerabilities were found. Therefore, you should update to log4j-2.16.0 or later (thanks @ruppde).
+
+Also, note that other recommendations like log4j2.formatMsgNoLookups set to true should be avoided.
+
+## Best identification
+
+It is best to identify log4shell vulnerability by looking at the local filesystem for log4j artifacts.
+
+These NSE scripts should be used only for additional assurance. NSEs help in identifying vulnerable services, not vulnerable application. It can identify vulnerable application if it logs every request (including root /), not if vulnerability is hidden behind some login. You will need web scanner which crawls complete web for that.
+
+You can check specific URI with following example:
+```http-log4shell.url=/my/application/uri```
+
+It will check via HTTP headers and cookie. If you need to check post/get forms. You should check http-spider-log4shell. Still, it is best to use web scanner with support for log4j.
 
 # References
 
