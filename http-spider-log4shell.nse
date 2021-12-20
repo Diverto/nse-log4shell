@@ -135,7 +135,7 @@ local function check_form(form, host, port, path)
   end
 
   for _,field in ipairs(form["fields"]) do
-    if sqli_field(field["type"]) then
+    if dynamic_field(field["type"]) then
       stdnse.debug2("checking field %s", field["name"])
       postdata[field["name"]] = payload
       response = sending_function(postdata)
